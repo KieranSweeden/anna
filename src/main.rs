@@ -1,8 +1,8 @@
 use std::path::PathBuf;
 
-use clap::{Parser, Subcommand};
+use clap::{Args, Parser, Subcommand};
 
-#[derive(Parser)]
+#[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 struct Cli {
     /// Optional name to operate on
@@ -20,14 +20,26 @@ struct Cli {
     command: Option<Commands>,
 }
 
-#[derive(Subcommand)]
+#[derive(Subcommand, Debug)]
 enum Commands {
-    /// does testing things
-    Test {
-        /// lists test values
-        #[arg(short, long)]
-        list: bool,
-    },
+    /// Manage your boards
+    Board(BoardArgs),
+}
+
+#[derive(Args, Debug)]
+#[command(args_conflicts_with_subcommands = true)]
+#[command(flatten_help = true)]
+struct BoardArgs {
+    #[command(subcommand)]
+    command: Option<BoardCommands>,
+}
+
+#[derive(Debug, Subcommand)]
+enum BoardCommands {
+    Create,
+    View,
+    Update,
+    Delete,
 }
 
 fn main() {
@@ -54,13 +66,27 @@ fn main() {
     // You can check for the existence of subcommands, and if found use their
     // matches just as you would the top level cmd
     match &cli.command {
-        Some(Commands::Test { list }) => {
-            if *list {
-                println!("Printing testing lists...");
-            } else {
-                println!("Not printing testing lists...");
+        Some(Commands::Board(command)) => match command.command {
+            Some(BoardCommands::Create) => {
+                println!("Creating board...");
+                todo!()
             }
-        }
+            Some(BoardCommands::View) => {
+                println!("Viewing board...");
+                todo!()
+            }
+            Some(BoardCommands::Update) => {
+                println!("Updating board...");
+                todo!()
+            }
+            Some(BoardCommands::Delete) => {
+                println!("Deleting board...");
+                todo!()
+            }
+            None => {
+                println!("Unrecognized command");
+            }
+        },
         None => {}
     }
 
