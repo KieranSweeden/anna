@@ -1,4 +1,5 @@
 use clap::{Args, Subcommand};
+use uuid::Uuid;
 
 mod create;
 
@@ -16,4 +17,21 @@ pub enum Commands {
     View,
     Update,
     Delete,
+}
+
+#[derive(Debug)]
+pub struct Board {
+    pub id: Uuid,
+    pub name: String,
+    pub description: Option<String>,
+}
+
+impl Board {
+    pub fn new(name: String, description: Option<String>) -> Self {
+        Board {
+            id: Uuid::new_v4(),
+            name,
+            description,
+        }
+    }
 }

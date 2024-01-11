@@ -6,9 +6,9 @@ use clap::Args;
 pub struct Arguments {
     /// The name of the board
     #[arg(short, long)]
-    name: String,
+    pub name: String,
 
     /// A description of the board
     #[arg(short, long)]
-    description: Option<String>,
+    pub description: Option<String>,
 }
