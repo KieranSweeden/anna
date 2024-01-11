@@ -6,6 +6,8 @@ Anna is a simple trello-like CLI application written in the Rust programming lan
 
 ## Usage
 
+	anna [entity] [action] ...
+
 ### Boards
 
 #### Create
