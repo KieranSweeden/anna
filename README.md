@@ -12,19 +12,19 @@ Anna is a simple trello-like CLI application written in the Rust programming lan
 
 #### Create
 
-	anna board create [board-name] --description [description]
+	anna board create --name <BOARD_NAME> --description <DESCRIPTION>
 
 #### View
 
-	anna board view [board-name]
+	anna board view --id <BOARD_ID>
 
 #### Update
 
-	anna board update [board-name] --name [new-board-name] --description [new-description]
+	anna board update --id <BOARD_ID> --name <BOARD_NAME>  --description <DESCRIPTION>
 
 #### Delete
 
-	anna board delete [board-name]
+	anna board delete --id <BOARD_ID>
 
 ## Todos
 
