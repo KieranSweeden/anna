@@ -7,5 +7,8 @@ edition = "2021"
 
 [dependencies]
 clap = { version = "4.4.14", features = ["derive"] }
+dotenv = "0.15.0"
 libsql-client = "0.33.2"
+url = "2.5.0"
 uuid = { version = "1.6.1", features = ["v4", "fast-rng", "macro-diagnostics"] }
+tokio = { version = "1.35.1", features = ["macros", "rt-multi-thread"] }

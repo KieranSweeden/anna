@@ -1,4 +1,6 @@
 use clap::{Parser, Subcommand};
+use dotenv::dotenv;
+use libsql_client::Client;
 
 mod board;
 
@@ -15,7 +17,32 @@ enum Commands {
     Board(board::Arguments),
 }
 
-fn main() {
+async fn get_db_client() -> Client {
+    let db_url = dotenv::var("DB_URL").expect("Failed to retrieve 'DB_URL' environment variable");
+
+    let db_auth_token = dotenv::var("DB_AUTH_TOKEN")
+        .expect("Failed to retrieve 'DB_AUTH_TOKEN' environment variable");
+
+    return libsql_client::Client::from_config(libsql_client::Config {
+        url: url::Url::parse(&db_url).unwrap(),
+        auth_token: Some(db_auth_token),
+    })
+    .await
+    .unwrap();
+}
+
+#[tokio::main]
+async fn main() {
+    dotenv().ok();
+
+    let db_client = get_db_client().await;
+
+    let example_data_str = include_str!("example-data.sql");
+
+    let result_set = db_client.execute(example_data_str).await;
+
+    dbg!(result_set);
+
     let args = Cli::parse();
 
     match args.command {
