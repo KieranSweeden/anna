@@ -20,7 +20,7 @@ Anna is a simple trello-like CLI application written in the Rust programming lan
 
 #### Update
 
-	anna board update [board-name] --name [new-board-name] --name [new-description]
+	anna board update [board-name] --name [new-board-name] --description [new-description]
 
 #### Delete
 
