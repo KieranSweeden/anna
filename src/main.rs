@@ -1,4 +1,6 @@
-use clap::{Args, Parser, Subcommand};
+use clap::{Parser, Subcommand};
+
+mod board;
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
@@ -10,32 +12,7 @@ struct Cli {
 #[derive(Subcommand, Debug)]
 enum Commands {
     /// Manage your boards
-    Board(BoardArgs),
-}
-
-#[derive(Args, Debug)]
-#[command(args_conflicts_with_subcommands = true)]
-#[command(flatten_help = true)]
-struct BoardArgs {
-    #[command(subcommand)]
-    command: Option<BoardCommands>,
-}
-
-#[derive(Debug, Subcommand)]
-enum BoardCommands {
-    Create(CreateBoardArgs),
-    View,
-    Update,
-    Delete,
-}
-
-#[derive(Debug, Args)]
-struct CreateBoardArgs {
-    #[arg(short, long)]
-    name: Option<String>,
-
-    #[arg(short, long)]
-    description: Option<String>,
+    Board(board::Arguments),
 }
 
 fn main() {
@@ -43,19 +20,19 @@ fn main() {
 
     match args.command {
         Commands::Board(board) => match board.command {
-            Some(BoardCommands::Create(_args)) => {
+            Some(board::Commands::Create(_args)) => {
                 println!("Creating board...");
                 todo!()
             }
-            Some(BoardCommands::View) => {
+            Some(board::Commands::View) => {
                 println!("Viewing board...");
                 todo!()
             }
-            Some(BoardCommands::Update) => {
+            Some(board::Commands::Update) => {
                 println!("Updating board...");
                 todo!()
             }
-            Some(BoardCommands::Delete) => {
+            Some(board::Commands::Delete) => {
                 println!("Deleting board...");
                 todo!()
             }
