@@ -1,6 +1,6 @@
 use clap::{Args, Subcommand};
 
-mod arguments;
+mod create;
 
 #[derive(Args, Debug)]
 #[command(args_conflicts_with_subcommands = true)]
@@ -12,7 +12,7 @@ pub struct Arguments {
 
 #[derive(Debug, Subcommand)]
 pub enum Commands {
-    Create(arguments::Create),
+    Create(create::Arguments),
     View,
     Update,
     Delete,
